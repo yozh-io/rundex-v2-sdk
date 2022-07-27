@@ -1,14 +1,17 @@
 import { Ether, Token, WETH9, CurrencyAmount } from '@uniswap/sdk-core'
 import { Pair, Route } from './index'
 
+const factoryAddress = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f';
+const initCodeHash ='0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f';
+
 describe('Route', () => {
   const ETHER = Ether.onChain(1)
   const token0 = new Token(1, '0x0000000000000000000000000000000000000001', 18, 't0')
   const token1 = new Token(1, '0x0000000000000000000000000000000000000002', 18, 't1')
   const weth = WETH9[1]
-  const pair_0_1 = new Pair(CurrencyAmount.fromRawAmount(token0, '100'), CurrencyAmount.fromRawAmount(token1, '200'))
-  const pair_0_weth = new Pair(CurrencyAmount.fromRawAmount(token0, '100'), CurrencyAmount.fromRawAmount(weth, '100'))
-  const pair_1_weth = new Pair(CurrencyAmount.fromRawAmount(token1, '175'), CurrencyAmount.fromRawAmount(weth, '100'))
+  const pair_0_1 = new Pair(CurrencyAmount.fromRawAmount(token0, '100'), CurrencyAmount.fromRawAmount(token1, '200'), factoryAddress, initCodeHash)
+  const pair_0_weth = new Pair(CurrencyAmount.fromRawAmount(token0, '100'), CurrencyAmount.fromRawAmount(weth, '100'), factoryAddress, initCodeHash)
+  const pair_1_weth = new Pair(CurrencyAmount.fromRawAmount(token1, '175'), CurrencyAmount.fromRawAmount(weth, '100'), factoryAddress, initCodeHash)
 
   it('constructs a path from the tokens', () => {
     const route = new Route([pair_0_1], token0, token1)

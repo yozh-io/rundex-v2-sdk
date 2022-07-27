@@ -4,6 +4,9 @@ import { Trade } from './trade'
 import JSBI from 'jsbi'
 import { Ether, CurrencyAmount, Percent, Token, TradeType, WETH9, Price } from '@uniswap/sdk-core'
 
+const factoryAddress = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f';
+const initCodeHash ='0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f';
+
 describe('Trade', () => {
   const ETHER = Ether.onChain(1)
   const token0 = new Token(1, '0x0000000000000000000000000000000000000001', 18, 't0')
@@ -13,33 +16,47 @@ describe('Trade', () => {
 
   const pair_0_1 = new Pair(
     CurrencyAmount.fromRawAmount(token0, JSBI.BigInt(1000)),
-    CurrencyAmount.fromRawAmount(token1, JSBI.BigInt(1000))
+    CurrencyAmount.fromRawAmount(token1, JSBI.BigInt(1000)),
+	  factoryAddress,
+	  initCodeHash
   )
   const pair_0_2 = new Pair(
     CurrencyAmount.fromRawAmount(token0, JSBI.BigInt(1000)),
-    CurrencyAmount.fromRawAmount(token2, JSBI.BigInt(1100))
+    CurrencyAmount.fromRawAmount(token2, JSBI.BigInt(1100)),
+	  factoryAddress,
+	  initCodeHash
   )
   const pair_0_3 = new Pair(
     CurrencyAmount.fromRawAmount(token0, JSBI.BigInt(1000)),
-    CurrencyAmount.fromRawAmount(token3, JSBI.BigInt(900))
+    CurrencyAmount.fromRawAmount(token3, JSBI.BigInt(900)),
+	  factoryAddress,
+	  initCodeHash
   )
   const pair_1_2 = new Pair(
     CurrencyAmount.fromRawAmount(token1, JSBI.BigInt(1200)),
-    CurrencyAmount.fromRawAmount(token2, JSBI.BigInt(1000))
+    CurrencyAmount.fromRawAmount(token2, JSBI.BigInt(1000)),
+	  factoryAddress,
+	  initCodeHash
   )
   const pair_1_3 = new Pair(
     CurrencyAmount.fromRawAmount(token1, JSBI.BigInt(1200)),
-    CurrencyAmount.fromRawAmount(token3, JSBI.BigInt(1300))
+    CurrencyAmount.fromRawAmount(token3, JSBI.BigInt(1300)),
+	  factoryAddress,
+	  initCodeHash
   )
 
   const pair_weth_0 = new Pair(
     CurrencyAmount.fromRawAmount(WETH9[1], JSBI.BigInt(1000)),
-    CurrencyAmount.fromRawAmount(token0, JSBI.BigInt(1000))
+    CurrencyAmount.fromRawAmount(token0, JSBI.BigInt(1000)),
+	  factoryAddress,
+	  initCodeHash
   )
 
   const empty_pair_0_1 = new Pair(
     CurrencyAmount.fromRawAmount(token0, JSBI.BigInt(0)),
-    CurrencyAmount.fromRawAmount(token1, JSBI.BigInt(0))
+    CurrencyAmount.fromRawAmount(token1, JSBI.BigInt(0)),
+	  factoryAddress,
+	  initCodeHash
   )
 
   it('can be constructed with ETHER as input', () => {

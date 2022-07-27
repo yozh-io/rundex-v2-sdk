@@ -3,6 +3,9 @@ import invariant from 'tiny-invariant'
 import { WETH9 as _WETH9, TradeType, Token, CurrencyAmount } from '@uniswap/sdk-core'
 import { Pair, Route, Trade } from '../index'
 
+const factoryAddress = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f';
+const initCodeHash ='0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f';
+
 const ADDRESSES = [
   '0x0000000000000000000000000000000000000001',
   '0x0000000000000000000000000000000000000002',
@@ -33,15 +36,21 @@ describe('entities', () => {
         pairs = [
           new Pair(
             CurrencyAmount.fromRawAmount(tokens[0], decimalize(1, tokens[0].decimals)),
-            CurrencyAmount.fromRawAmount(tokens[1], decimalize(1, tokens[1].decimals))
+            CurrencyAmount.fromRawAmount(tokens[1], decimalize(1, tokens[1].decimals)),
+	          factoryAddress,
+	          initCodeHash
           ),
           new Pair(
             CurrencyAmount.fromRawAmount(tokens[1], decimalize(1, tokens[1].decimals)),
-            CurrencyAmount.fromRawAmount(tokens[2], decimalize(1, tokens[2].decimals))
+            CurrencyAmount.fromRawAmount(tokens[2], decimalize(1, tokens[2].decimals)),
+	          factoryAddress,
+	          initCodeHash
           ),
           new Pair(
             CurrencyAmount.fromRawAmount(tokens[2], decimalize(1, tokens[2].decimals)),
-            CurrencyAmount.fromRawAmount(WETH9, decimalize(1234, WETH9.decimals))
+            CurrencyAmount.fromRawAmount(WETH9, decimalize(1234, WETH9.decimals)),
+	          factoryAddress,
+	          initCodeHash
           )
         ]
       })
@@ -80,7 +89,9 @@ describe('entities', () => {
             [
               new Pair(
                 CurrencyAmount.fromRawAmount(tokens[1], decimalize(5, tokens[1].decimals)),
-                CurrencyAmount.fromRawAmount(WETH9, decimalize(10, WETH9.decimals))
+                CurrencyAmount.fromRawAmount(WETH9, decimalize(10, WETH9.decimals)),
+	              factoryAddress,
+	              initCodeHash
               )
             ],
             tokens[1],
@@ -131,7 +142,9 @@ describe('entities', () => {
                       decimalize(10, WETH9.decimals),
                       tokens[1].decimals === 9 ? JSBI.BigInt('30090280812437312') : JSBI.BigInt('30090270812437322')
                     )
-                  )
+                  ),
+	                factoryAddress,
+	                initCodeHash
                 )
               ],
               tokens[1],
